@@ -82,3 +82,18 @@ type Account = SchemaToType<AccountSchema>;
 //     phone?: string;
 //   };
 // }
+
+
+type RoleSchema = {
+  id: 'number';
+  name: 'string';
+};
+
+type UserSchemaWithRole = {
+  id: 'number';
+  name: 'string';
+  role: RoleSchema; // relation: User belongs to one Role
+};
+
+type Role = SchemaToType<RoleSchema>;
+type UserWithRole = SchemaToType<UserSchemaWithRole>;
