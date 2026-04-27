@@ -3,5 +3,6 @@
   "dest": "../../dist/schema",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "keepLifecycleScripts": true
 }
