@@ -26,8 +26,11 @@ A **TypeScript** type definitions package for **schema** modeling.
 
 ## Features
 
-- **Feature 1**: Description.
-- **Feature 2**: Description.
+- **Type-level** schema-to-TypeScript conversion (`SchemaToType`)
+- **Optional** key support via `?` marker (e.g. `'email?'`)
+- **Primitive** schema mapping (`string`, `number`, `boolean`, `date`)
+- **Array** schema support for primitives and nested object items
+- **Zero** runtime cost (types only)
 
 ## Table of contents
 
@@ -40,6 +43,7 @@ A **TypeScript** type definitions package for **schema** modeling.
     - [`SchemaToType`](#schematotype)
     - [`SchemaTypeMap`](#schematypemap)
     - [`SchemaValue`](#schemavalue)
+- [Examples](#examples)
 - [Contributing](#contributing)
 - [Support](#support)
 - [Code of Conduct](#code-of-conduct)
@@ -92,6 +96,18 @@ import { RemoveOptional } from '@typedly/schema';
 
 ```typescript
 import type { SchemaToType } from '@typedly/schema';
+```
+
+### `SchemaTypeMap`
+
+```typescript
+import { SchemaTypeMap } from '@typedly/schema';
+```
+
+### `SchemaValue`
+
+```typescript
+import { SchemaValue } from '@typedly/schema';
 ```
 
 ## Examples
@@ -195,18 +211,6 @@ type Account = SchemaToType<AccountSchema>;
 //     phone?: string;
 //   };
 // }
-```
-
-### `SchemaTypeMap`
-
-```typescript
-import { SchemaTypeMap } from '@typedly/schema';
-```
-
-### `SchemaValue`
-
-```typescript
-import { SchemaValue } from '@typedly/schema';
 ```
 
 ## Contributing
