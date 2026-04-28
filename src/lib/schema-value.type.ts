@@ -1,5 +1,5 @@
 // Type.
-import type { ExpandDeep } from "./expand-deep.type";
+import type { ExpandDeep } from "@typedly/utility";
 import type { SchemaToType } from "./schema-to-type";
 import type { SchemaTypeMap } from "./schema-type-map.type";
 /**
