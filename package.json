@@ -1,12 +1,15 @@
 {
   "name": "@typedly/schema",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "wwwdev.io <sciborrudnicki@wwwdev.io>",
   "description": "A TypeScript type definitions package for schema modeling.",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
+  },
+  "peerDependencies": {
+    "@typedly/utility": "^1.1.0"
   },
   "scripts": {
     "prepublishOnly": "npm install rimraf && npm run pkg && npm run clean",

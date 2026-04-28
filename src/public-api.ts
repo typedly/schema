@@ -3,9 +3,7 @@
  */
 
 export type {
-  ExpandDeep,
-  IsOptional,
-  RemoveOptional,
+  SchemaRecordToType,
   SchemaToType,
   SchemaTypeMap,
   SchemaValue,
