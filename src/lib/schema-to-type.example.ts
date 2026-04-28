@@ -117,7 +117,6 @@ export type Shop = {
 type ShopSchema = SchemaToType<Shop>;
 
 // Example
-
 const example: SchemaToType<{
   name: 'string';
   age: 'number';
@@ -166,3 +165,10 @@ const userSchema = createSchema({
   active: true,
   createdAt: new Date(),
 });
+
+// Oops, an end user writes this:
+const OopsSchema = {
+  tags: ["a", "b"] // native string[]! Not the schema style, but tolerated
+}
+type Result = SchemaToType<typeof OopsSchema>
+// tags: string[]   (instead of never)
