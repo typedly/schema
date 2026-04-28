@@ -8,4 +8,3 @@ export type SchemaTypeMap = {
   boolean: boolean;
   date: Date;
 };
-
