@@ -27,7 +27,7 @@ A **TypeScript** type definitions package for **schema** modeling.
 ## Features
 
 - **Type-level** schema-to-TypeScript conversion (`SchemaToType`)
-- **Optional** key support via `?` marker (e.g. `'email?'`)
+- **Optional** key support via `?` marker (e.g. `email?`)
 - **Primitive** schema mapping (`string`, `number`, `boolean`, `date`)
 - **Array** schema support for primitives and nested object items
 - **Zero** runtime cost (types only)
@@ -74,12 +74,36 @@ import {
 
 ```typescript
 import { SchemaRecordToType } from '@typedly/schema';
+
+type dbSchema = SchemaRecordToType<{
+  person: { id: 'number', name: 'string' },
+  cart: { id: 'number', items: { array: 'string' } },
+}>;
+
+// Result:
+// type dbSchema = {
+//   person: {
+//     id: number;
+//     name: string;
+//   };
+//   cart: {
+//     id: number;
+//     items: string[];
+//   };
+// }
 ```
 
 ### `SchemaToType`
 
 ```typescript
 import type { SchemaToType } from '@typedly/schema';
+
+// Oops, an end user writes this:
+const OopsSchema = {
+  tags: ["a", "b"] // native string[]! Not the schema style, but tolerated
+}
+type Result = SchemaToType<typeof OopsSchema>
+// tags: string[]   (instead of never)
 ```
 
 ### `SchemaTypeMap`
@@ -92,6 +116,44 @@ import { SchemaTypeMap } from '@typedly/schema';
 
 ```typescript
 import { SchemaValue } from '@typedly/schema';
+
+// 1a. Primitive array:
+type Ex1 = SchemaValue<{ array: 'string' }>;
+// => string[]
+
+// 1b. Nested object array:
+type Ex2 = SchemaValue<{ array: { id: 'number', name: 'string' } }>;
+// => { id: number; name: string; }[]
+
+// 1c. Deeply nested arrays:
+type Ex3 = SchemaValue<{ array: { array: 'boolean' } }>;
+// => boolean[][]
+
+// 2. Primitive type:
+type Ex4 = SchemaValue<'string'>; // string
+// => string
+
+type Ex5 = SchemaValue<'number'>; // number
+// => number
+
+type Ex6 = SchemaValue<'boolean'>; // boolean
+// => boolean
+
+type Ex7 = SchemaValue<'date'>;    // Date
+// => Date
+
+// 4. readonly any[] — Native TypeScript array (forgiveness fallback)
+type Ex8 = SchemaValue<string[]>; // string[]
+
+// 5. Record<string, any> — Nested object (schema for object)
+type Ex9 = SchemaValue<{ id: 'number'; name: 'string' }>;
+// => { id: number; name: string; }
+
+// 6. Invalid types (not in SchemaTypeMap, not an array, not a nested object)
+type Ex13 = SchemaValue<null>;      // never
+type Ex14 = SchemaValue<undefined>; // never
+type Ex15 = SchemaValue<()=>void>;  // never
+type Ex16 = SchemaValue<42>;        // never
 ```
 
 ## Examples
