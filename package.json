@@ -1,6 +1,6 @@
 {
   "name": "@typedly/schema",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "wwwdev.io <sciborrudnicki@wwwdev.io>",
   "description": "A TypeScript type definitions package for schema modeling.",
   "license": "MIT",
