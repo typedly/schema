@@ -30,7 +30,7 @@ type User1 = SchemaToType<UserSchema1>;
 // {
 //   id: number;
 //   name: string;
-//   email?: string;
+//   email?: string | undefined;
 // }
 
 // ### 3) Arrays of primitives
@@ -79,7 +79,7 @@ type Account = SchemaToType<AccountSchema>;
 //   profile: {
 //     firstName: string;
 //     lastName: string;
-//     phone?: string;
+//     phone?: string | undefined;
 //   };
 // }
 
