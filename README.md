@@ -37,9 +37,7 @@ A **TypeScript** type definitions package for **schema** modeling.
 - [Installation](#installation)
 - [Api](#api)
   - Type
-    - [`ExpandDeep`](#expanddeep)
-    - [`IsOptional`](#isoptional)
-    - [`RemoveOptional`](#removeoptional)
+    - [`SchemaRecordToType`](#schemarecordtotype)
     - [`SchemaToType`](#schematotype)
     - [`SchemaTypeMap`](#schematypemap)
     - [`SchemaValue`](#schemavalue)
@@ -63,9 +61,7 @@ npm install @typedly/schema --save-peer
 
 ```typescript
 import {
-  ExpandDeep,
-  IsOptional,
-  RemoveOptional,
+  SchemaRecordToType,
   SchemaToType,
   SchemaTypeMap,
   SchemaValue,
@@ -74,22 +70,10 @@ import {
 
 ### Type
 
-### `ExpandDeep`
+### `SchemaRecordToType`
 
 ```typescript
-import { ExpandDeep } from '@typedly/schema';
-```
-
-### `IsOptional`
-
-```typescript
-import { IsOptional } from '@typedly/schema';
-```
-
-### `RemoveOptional`
-
-```typescript
-import { RemoveOptional } from '@typedly/schema';
+import { SchemaRecordToType } from '@typedly/schema';
 ```
 
 ### `SchemaToType`
@@ -111,6 +95,29 @@ import { SchemaValue } from '@typedly/schema';
 ```
 
 ## Examples
+
+### Providing
+
+```typescript
+import type { SchemaToType } from '@typedly/schema';
+
+function createSchema<const Schema extends Record<string, unknown>>(schema: Schema) {
+  return (user: SchemaToType<Schema>) => user;
+}
+
+// 
+const userSchema = createSchema({
+  id: "number",
+  name: "string",
+  active: "boolean",
+  createdAt: "date",
+})({
+  id: 1,
+  name: "John",
+  active: true,
+  createdAt: new Date(),
+});
+```
 
 ### 1) Basic schema to type
 
@@ -141,7 +148,7 @@ import type { SchemaToType } from '@typedly/schema';
 type UserSchema = {
   id: 'number';
   name: 'string';
-  'email?': 'string';
+  email?: 'string';
 };
 
 type User = SchemaToType<UserSchema>;
